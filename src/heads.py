@@ -150,7 +150,7 @@ def get_classification_head_every(args: argparse.Namespace) -> nn.Module:
 
 
 def get_original_classification_head(args) -> nn.Module:
-    original_ckpt_path = '/path/to/ckpt'
+    original_ckpt_path = '/path/to/checkpoints'
     filename = os.path.join(original_ckpt_path, args.model, f'head_{args.dataset_name}.pt')
     if not os.path.exists(filename):
         classification_head = get_classification_head(args, args.dataset_name)
