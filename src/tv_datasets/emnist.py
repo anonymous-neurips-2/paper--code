@@ -8,12 +8,12 @@ class EMNIST:
     def __init__(
         self,
         preprocess,
-        location='/data/leeye/task_vectors/datasets',
+        location,
         batch_size=128,
         num_workers=16,
     ):
 
-        location = os.path.join('/data/leeye/task_vectors/datasets', "EMNIST")
+        location = os.path.join(location, "EMNIST")
         self.train_dataset = datasets.EMNIST(
             root=location,
             download=True,
