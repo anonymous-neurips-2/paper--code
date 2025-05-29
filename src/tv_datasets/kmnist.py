@@ -13,7 +13,7 @@ class KMNIST:
         num_workers=16,
     ):
 
-        location = os.path.join("~/data", "KMNIST")
+        location = os.path.join(location, "KMNIST")
         self.train_dataset = datasets.KMNIST(root=location, download=True, train=True, transform=preprocess)
 
         self.train_loader = torch.utils.data.DataLoader(
