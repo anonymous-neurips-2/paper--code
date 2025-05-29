@@ -12,9 +12,8 @@ class Fruits360(GenericDataset):
 
         fruit_root = os.path.join(location, "Fruits360")
         if not os.path.isdir(fruit_root):
-            raise FileNotFoundError(f"Fruits360 폴더가 없습니다: {fruit_root}")
+            raise FileNotFoundError(f"There is no `Fruits360` directory: {fruit_root}")
 
-        # 1차 후보: fruit_root 자체 + 그 직속 하위 디렉토리
         candidates = [fruit_root] + [
             os.path.join(fruit_root, d)
             for d in os.listdir(fruit_root)
@@ -23,13 +22,11 @@ class Fruits360(GenericDataset):
 
         base_dir = None
 
-        # 1. 직접 Training/Test 있는지
         for c in candidates:
             if os.path.isdir(os.path.join(c, "Training")) and os.path.isdir(os.path.join(c, "Test")):
                 base_dir = c
                 break
 
-        # 2. 없으면, 각 candidate 안의 하위폴더까지 뒤진다
         if base_dir is None:
             for c in candidates:
                 for d in os.listdir(c):
@@ -43,19 +40,16 @@ class Fruits360(GenericDataset):
                     break
 
         if base_dir is None:
-            # 실패 시 에러 메시지에 후보 경로들을 모두 출력
-            msg  = "Training/Test 폴더를 찾을 수 없습니다. 후보 경로들:\n"
+            msg  = "There is no `Training/Test` directory. candidates:\n"
             msg += "\n".join(candidates)
             raise FileNotFoundError(msg)
 
         train_dir = os.path.join(base_dir, "Training")
         test_dir  = os.path.join(base_dir, "Test")
 
-        # ImageFolder 로드
         self.train_dataset = ImageFolder(train_dir, transform=preprocess)
         self.test_dataset  = ImageFolder(test_dir,  transform=preprocess)
 
-        # DataLoader 구성
         self.train_loader = DataLoader(
             self.train_dataset,
             batch_size=batch_size,
@@ -71,5 +65,4 @@ class Fruits360(GenericDataset):
             pin_memory=True,
         )
 
-        # 클래스 이름 저장
         self.classnames = self.train_dataset.classes
