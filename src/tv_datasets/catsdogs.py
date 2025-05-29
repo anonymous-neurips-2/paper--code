@@ -8,7 +8,7 @@ from src.tv_datasets.common import GenericDataset
 class CatsDogs(GenericDataset):
     def __init__(self, preprocess, location, batch_size=128, num_workers=4):
         super().__init__()
-        root = os.path.join(location, "CatsDogs")   # ← 폴더명만 교체
+        root = os.path.join(location, "CatsDogs")
         full = ImageFolder(root, transform=preprocess)
 
         # 10 % validation split
