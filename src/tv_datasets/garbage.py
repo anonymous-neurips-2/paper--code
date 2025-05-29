@@ -1,4 +1,3 @@
-# src/datasets/<파일명>.py
 import os, torch
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader, random_split
