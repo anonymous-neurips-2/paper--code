@@ -13,7 +13,7 @@ class PCAM:
         num_workers=16,
     ):
 
-        location = os.path.join("~/data", "PCAM")
+        location = os.path.join(location, "PCAM")
         self.train_dataset = datasets.PCAM(root=location, download=True, split="train", transform=preprocess)
 
         self.train_loader = torch.utils.data.DataLoader(
