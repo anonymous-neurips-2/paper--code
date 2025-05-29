@@ -13,7 +13,7 @@ class FashionMNIST:
         num_workers=16,
     ):
 
-        location = os.path.join("~/data", "FashionMNIST")
+        location = os.path.join(location, "FashionMNIST")
         self.train_dataset = datasets.FashionMNIST(root=location, download=True, train=True, transform=preprocess)
 
         self.train_loader = torch.utils.data.DataLoader(
