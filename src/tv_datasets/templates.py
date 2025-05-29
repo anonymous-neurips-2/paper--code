@@ -303,7 +303,6 @@ fruits360_template = [
     lambda c: f'a photo of a {c}.',
 ]
 
-# ❷ dataset_to_template 사전에 매핑 추가
 dataset_to_template.update({
     "Vegetables": vegetables_template,
     "Kvasir": kvasir_template,
